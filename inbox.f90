@@ -1,20 +1,5 @@
-! Interfaces for the Functions
-!      INTERFACE
-!        logical FUNCTION inbox( x, y, pts )
-!          real, INTENT(IN) :: x, y
-!          real, dimension(1:2,1:4), INTENT(IN) :: pts
-!        END FUNCTION
-!      END INTERFACE
-!
-!      INTERFACE
-!        logical FUNCTION inbox2( x, y, pts )
-!          real, INTENT(IN) :: x, y
-!          real, dimension(1:2,1:4), INTENT(IN) :: pts
-!        END FUNCTION
-!      END INTERFACE
-
-!===============================================================================
-
+module inbox_funcs
+      contains
 !*******************************************************************************
       logical FUNCTION inbox( x, y, pts )
       IMPLICIT NONE
@@ -32,10 +17,6 @@
       ! LOCAL VARIABLES---------------------------------
       real :: slope1, slope2, slope3, slope4, val1, val2, val3, val4
       real, dimension(1:2) :: p1, p2, p3, p4
-      real, dimension(4) :: maxarrx, maxarry, dist
-      integer :: i, negcount, poscount
-      integer, dimension(1) :: closest
-      logical :: onetwo, onethree, onefour
 
       p1(1) = pts(1,1)
       p1(2) = pts(1,2)
@@ -106,10 +87,9 @@
       ENDIF
 
       END FUNCTION inbox
-
 !===============================================================================
-!*******************************************************************************
 
+!*******************************************************************************
       logical FUNCTION inbox2( x, y, pts )
       IMPLICIT NONE
 ! Same as above, put a different implementation idea I found on the internet.
@@ -117,37 +97,30 @@
 ! vertices of the box.
 ! See http://tog.acm.org/editors/erich/ptinpoly/
 !*******************************************************************************
-      
-
       real, INTENT(IN) :: x, y
       real, dimension(1:2,1:4), INTENT(IN) :: pts
-
-      inbox2 = .TRUE.
-
+      inbox2 = .TRUE. ! it's a work in progress...
       END FUNCTION inbox2
-
 !===============================================================================
+
 !*******************************************************************************
       real FUNCTION line_y( m, x1, y1, px )
       IMPLICIT NONE
 ! A quick function that will return the corresponding y-value of the x-value px
 ! where the point px is on the line made by the point (x1,y1) and the slope m.
 !*******************************************************************************
-
       real, INTENT(IN) :: m, x1, y1, px
-
       line_y = m * (px - x1) + y1
-
       END FUNCTION line_y
-
 !===============================================================================
+
 !*******************************************************************************
       real FUNCTION slope( p1, p2 )
       IMPLICIT NONE
 ! Calculate the slope between two points in 2-dimensional space
 !*******************************************************************************
       real, dimension(1:2), INTENT(IN) :: p1, p2
-
       slope = (p2(2)-p1(2)) / (p2(1)-p1(1))
-
       END FUNCTION slope
+!===============================================================================
+end module inbox_funcs

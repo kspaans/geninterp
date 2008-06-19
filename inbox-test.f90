@@ -1,13 +1,9 @@
 !*******************************************************************************
       PROGRAM test_inbox
+      use inbox_funcs
       IMPLICIT NONE
 ! A quick program to test the point-in-box functions
 !*******************************************************************************
-
-      ! Functions ------------
-      logical :: inbox, inbox2
-      !-----------------------
-
       real :: i = 5.01
       real :: j = 5.51
       real, dimension(4,2) :: ptz
